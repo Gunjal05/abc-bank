@@ -41,9 +41,12 @@ public void withdraw(double amount) {
                     return amount * 0.001;
                 else
                     return 1 + (amount-1000) * 0.002;
-//            case SUPER_SAVINGS:
-//                if (amount <= 4000)
-//                    return 20;
+            case SUPER_SAVINGS:
+               if (amount <= 1000)
+                  return amount * 0.04; // 4% for the first $1,000
+               if (amount <= 2000)
+                  return 40 + (amount - 1000) * 0.07; // 7% for the next $1,000
+                return 110 + (amount - 2000) * 0.12; // 12% for amounts above $2,000
             case MAXI_SAVINGS:
                 if (amount <= 1000)
                     return amount * 0.02;
