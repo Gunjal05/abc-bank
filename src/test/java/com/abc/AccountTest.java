@@ -17,12 +17,16 @@ import static org.junit.Assert.assertTrue;
 public class AccountTest {
     private Account checkingAccount;
     private Account savingsAccount;
+    private Account superSavingsAccount;
+    private Account maxiSavingsAccount;
     public AccountTest() {
     }
     @Before
     public void setUp() {
         checkingAccount = new Account(Account.CHECKING);
         savingsAccount = new Account(Account.SAVINGS);
+        superSavingsAccount = new Account(Account.SUPER_SAVINGS);
+        maxiSavingsAccount = new Account(Account.MAXI_SAVINGS);
     }
     @Test
     public void testDeposit() {
@@ -48,4 +52,34 @@ public class AccountTest {
         assertEquals(5000, checkingAccount.sumTransactions(), 0);
         assertEquals(5000, savingsAccount.sumTransactions(), 0);
     }
+    @Test
+    public void testSuperSavingsInterest() {
+
+      // Test interest for amount <= 1000
+      superSavingsAccount.deposit(1000);
+      assertEquals(40, superSavingsAccount.interestEarned(), 0.001);
+
+      // Test interest for amount between 1000 and 2000
+      superSavingsAccount.deposit(1000); // Total 2000
+      assertEquals(110, superSavingsAccount.interestEarned(), 0.001);
+
+      // Test interest for amount > 2000
+      superSavingsAccount.deposit(1000); // Total 3000
+      assertEquals(230, superSavingsAccount.interestEarned(), 0.001);
+   }
+  @Test
+  public void testMaxiSavingsInterest() {
+
+     // Test interest for amount <= 1000
+     maxiSavingsAccount.deposit(1000);
+     assertEquals(20, maxiSavingsAccount.interestEarned(), 0.001);
+
+     // Test interest for amount between 1000 and 2000
+     maxiSavingsAccount.deposit(1000); // Total 2000
+     assertEquals(70, maxiSavingsAccount.interestEarned(), 0.001);
+
+    // Test interest for amount > 2000
+    maxiSavingsAccount.deposit(1000); // Total 3000
+    assertEquals(170, maxiSavingsAccount.interestEarned(), 0.001);
+ }
 }
