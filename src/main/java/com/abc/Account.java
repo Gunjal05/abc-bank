@@ -72,5 +72,12 @@ public void withdraw(double amount) {
     public int getAccountType() {
         return accountType;
     }
-
+    public void transfer(Account toAccount, double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("amount must be greater than zero");
+        } else {
+            this.withdraw(amount);
+            toAccount.deposit(amount);
+        }
+    }
 }
