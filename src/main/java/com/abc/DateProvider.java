@@ -11,6 +11,10 @@ public class DateProvider {
             instance = new DateProvider();
         return instance;
     }
+    // Allow setting a mock instance for testing
+     public static void setInstance(DateProvider dateProvider){
+     instance = provider;
+     }
 
     public Date now() {
         return Calendar.getInstance().getTime();
